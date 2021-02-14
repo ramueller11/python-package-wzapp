@@ -103,7 +103,7 @@ class WebApp():
     def __init__(self, name=None, version=None ):
         self.name = name if name != None else 'webserver'
         self.version = version if version else '0.1'
-        self.server_addr = '0.0.0.0'
+        self.server_addr = 'localhost'
         self.server_port = 8888
         self.route_table = RouteTable()
         self.router  = None
@@ -235,6 +235,10 @@ class WebApp():
         # return the response
         return resp(ws_env, ws_start_trigger)
 
+    
+    def __call__(self, ws_env, ws_start_trigger):
+        return self._wsgi_handler(ws_env,ws_start_trigger)
+    
     def run(self, **kwargs):
         print('Running %s v.%s' % (self.name,self.version) )
         _wz.serving.run_simple(self.server_addr, self.server_port, self._wsgi_handler, **kwargs)
