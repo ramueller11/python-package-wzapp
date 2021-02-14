@@ -25,7 +25,7 @@ def homepage(req):
 
 #using the Werkzeug placeholders to parameterize 
 # a URL tree. name is passed as a python argument
-@app.view('/name/<string:name>'
+@app.view('/name/<string:name>')
 def namepage(req, name):
    return HTTPResponse('Greetings, name!')
 
